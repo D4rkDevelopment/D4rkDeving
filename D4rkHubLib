@@ -443,7 +443,7 @@ function lib:CreateMain(title)
 				ToggleSquareCorner.Parent = ToggleSquare
 		end
 		function pages:CreateSlider(slidertext,min,max,start,inc,callback)
-			local Slider = Instance.new("TextButton")
+			local Slider = Instance.new("Frame")
 			local SliderCorner = Instance.new("UICorner")
 			local SliderText = Instance.new("TextLabel")
 			local SliderBack = Instance.new("Frame")
@@ -468,13 +468,7 @@ function lib:CreateMain(title)
 			Slider.Name = "Slider"
 			Slider.Parent = PageContainer
 			Slider.BackgroundColor3 = Color3.fromRGB(22, 22, 22)
-			Slider.Position = UDim2.new(0, 0, 0.22012578, 0)
 			Slider.Size = UDim2.new(1, 0, -0.0125786159, 50)
-			Slider.AutoButtonColor = false
-			Slider.Font = Enum.Font.SourceSans
-			Slider.Text = ""
-			Slider.TextColor3 = Color3.fromRGB(0, 0, 0)
-			Slider.TextSize = 14.000
 
 			SliderCorner.CornerRadius = UDim.new(0, 3)
 			SliderCorner.Name = "SliderCorner"
@@ -525,14 +519,14 @@ function lib:CreateMain(title)
 				SliderValue.Text = tostring(Val)
 				pcall(callback, tonumber(Val))
 			end
-			Slide.InputBegan:Connect(
+			SliderBack.InputBegan:Connect(
 				function(input)
 					if input.UserInputType == Enum.UserInputType.MouseButton1 then
 						dragging = true
 					end
 				end
 			)
-			Slide.InputEnded:Connect(
+			SliderBack.InputEnded:Connect(
 				function(input)
 					if input.UserInputType == Enum.UserInputType.MouseButton1 then
 						dragging = false
