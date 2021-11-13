@@ -110,6 +110,7 @@ function lib:CreateMain(title)
 	local MenuBackCover = Instance.new("Frame")
 	local AllTabBtns = Instance.new("Frame")
 	local AllTabBtnsListing = Instance.new("UIListLayout")
+	MakeDraggable(TopBar, UIBack)
 	
 	MenuBack.Name = "MenuBack"
 	MenuBack.Parent = UIBack
@@ -170,13 +171,13 @@ function lib:CreateMain(title)
 	UIBackGlow.ImageColor3 = Color3.fromRGB(0, 0, 0)
 	UIBackGlow.ScaleType = Enum.ScaleType.Slice
 	UIBackGlow.SliceCenter = Rect.new(20, 20, 280, 280)
+	UIBackGlow.Visible = false
 
 	TopBar.Name = "TopBar"
 	TopBar.Parent = UIBack
 	TopBar.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
 	TopBar.Size = UDim2.new(0, 477, 0, 35)
 	TopBar.ZIndex = 10
-	MakeDraggable(TopBar, UIBack)
 
 	TopBarCorner.CornerRadius = UDim.new(0, 3)
 	TopBarCorner.Name = "TopBarCorner"
@@ -610,5 +611,3 @@ function lib:CreateMain(title)
 	return tabs
 end
 return lib
-
---Properties:
