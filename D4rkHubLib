@@ -312,7 +312,7 @@ function lib:CreateMain(title)
 		TabBtn.TextSize = 14.000
 		TabBtn.MouseButton1Click:Connect(function()
 			for i,v in next, AllTabBtns:GetChildren() do
-				if v.Name == "Tab" then
+				if v.Name == "TabBtn" then
 					v.BackgroundTransparency = 1
 				end
 				TabBtn.BackgroundTransparency = 0
@@ -512,27 +512,27 @@ function lib:CreateMain(title)
 			SlideCorner.Parent = Slide
 			
 			local function move(Input)
-				local XSize = math.clamp((Input.Position.X - Slider.AbsolutePosition.X) / Slider.AbsoluteSize.X, 0, 1)
+				local XSize = math.clamp((Input.Position.X - Slide.AbsolutePosition.X) / Slide.AbsoluteSize.X, 0, 1)
 				local Increment = inc and (max / ((max - min) / (inc * 4))) or 
 					(max >= 50 and max / ((max - min) / 4)) or 
 					(max >= 25 and max / ((max - min) / 2)) or 
 					(max / (max - min))
 
 				local SizeRounded = UDim2.new((math.round(XSize * ((max / Increment) * 4)) / ((max / Increment) * 4)), 0, 1, 0)
-				Slider:TweenSize(SizeRounded, Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .2, true)
+				Slide:TweenSize(SizeRounded, Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .2, true)
 
 				local Val = math.round((((SizeRounded.X.Scale * max) / max) * (max - min) + min) * 20) / 20
 				SliderValue.Text = tostring(Val)
 				pcall(callback, tonumber(Val))
 			end
-			Slider.InputBegan:Connect(
+			Slide.InputBegan:Connect(
 				function(input)
 					if input.UserInputType == Enum.UserInputType.MouseButton1 then
 						dragging = true
 					end
 				end
 			)
-			Slider.InputEnded:Connect(
+			Slide.InputEnded:Connect(
 				function(input)
 					if input.UserInputType == Enum.UserInputType.MouseButton1 then
 						dragging = false
