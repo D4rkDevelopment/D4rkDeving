@@ -42,7 +42,7 @@ function Ripple(obj)
 		Circle.ZIndex = 10
 		Circle.Image = "rbxassetid://266543268"
 		Circle.ImageColor3 = Color3.fromRGB(150,150,150)
-		Circle.ImageTransparency = 0.6
+		Circle.ImageTransparency = 0.3
 		local NewX, NewY = Mouse.X - Circle.AbsolutePosition.X, Mouse.Y - Circle.AbsolutePosition.Y
 		Circle.Position = UDim2.new(0, NewX, 0, NewY)
 		local Size = obj.AbsoluteSize.X
@@ -394,23 +394,24 @@ function lib:CreateMain(title)
 				ToggleButton.Font = Enum.Font.SourceSans
 				ToggleButton.Text = ""
 				ToggleButton.TextColor3 = Color3.fromRGB(0, 0, 0)
-			ToggleButton.TextSize = 14.000
-			ToggleButton.ClipsDescendants = true
-			ToggleButton.MouseButton1Click:Connect(function()
+				ToggleButton.TextSize = 14.000
+				ToggleButton.ClipsDescendants = true
+			
 				local tog = false
-				Ripple(ToggleButton)
-				tog = not tog
-				callback(tog)
-				if tog then
-					game.TweenService:Create(ToggleSquare, TweenInfo.new(0.15, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
-						BackgroundColor3 = Color3.fromRGB(35,35,35)
-					}):Play()
-				else
-					game.TweenService:Create(ToggleSquare, TweenInfo.new(0.15, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
-						BackgroundColor3 = Color3.fromRGB(19,19,19)
-					}):Play()
-				end
-			end)
+			
+				ToggleButton.MouseButton1Click:Connect(function()
+					tog = not tog
+					callback(tog)
+					if tog then
+							game.TweenService:Create(ToggleSquare, TweenInfo.new(0.15, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+								BackgroundColor3 = Color3.fromRGB(35,35,35)
+							}):Play()
+					else
+							game.TweenService:Create(ToggleSquare, TweenInfo.new(0.15, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+								BackgroundColor3 = Color3.fromRGB(19,19,19)
+							}):Play()
+					end
+				end)
 
 				ToggleButtonCorner.CornerRadius = UDim.new(0, 3)
 				ToggleButtonCorner.Name = "ToggleButtonCorner"
