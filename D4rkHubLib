@@ -111,7 +111,7 @@ function lib:CreateWindow(title)
 	MakeDraggable(TopFrame,MainFrame)
 	
 	D4rkHub.Name = "D4rkHub"
-	D4rkHub.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+	D4rkHub.Parent = game.CoreGui
 	D4rkHub.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 	MainFrame.Name = "MainFrame"
