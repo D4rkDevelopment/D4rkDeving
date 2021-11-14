@@ -48,7 +48,7 @@ function Ripple(obj)
 		local Size = obj.AbsoluteSize.X
 		TweenService:Create(Circle, TweenInfo.new(.4), {Position = UDim2.fromScale(PX,PY) - UDim2.fromOffset(Size/2,Size/2), ImageTransparency = 1, Size = UDim2.fromOffset(Size,Size)}):Play()
 		spawn(function()
-			wait(1.2)
+			wait(.4)
 			Circle:Destroy()
 		end)
 	end)
