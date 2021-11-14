@@ -487,7 +487,6 @@ function lib:CreateMain(title)
 			SliderBack.BackgroundColor3 = Color3.fromRGB(18, 18, 18)
 			SliderBack.Position = UDim2.new(0.027999986, 0, 0.626000047, 0)
 			SliderBack.Size = UDim2.new(0, 404, 0, 7)
-			SliderBack.AnchorPoint = Vector2.new(0.5, 0)
 
 			SliderBackCorner.CornerRadius = UDim.new(0, 2)
 			SliderBackCorner.Name = "SliderBackCorner"
@@ -496,7 +495,8 @@ function lib:CreateMain(title)
 			Slide.Name = "Slide"
 			Slide.Parent = SliderBack
 			Slide.BackgroundColor3 = Color3.fromRGB(26, 26, 26)
-			Slide.Size = UDim2.new((start or 0) / max, 0, 1, 0)
+			Slide.Size = UDim2.new(0.202970296, 100, 1, 0)
+
 			SlideCorner.CornerRadius = UDim.new(0, 2)
 			SlideCorner.Name = "SlideCorner"
 			SlideCorner.Parent = Slide
