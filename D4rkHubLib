@@ -1,5 +1,5 @@
 for _, v in pairs(game:GetService("CoreGui"):GetChildren()) do
-	if v:FindFirstChild("D4rkHub") then
+	if v:FindFirstChild("MainFrame") then
 		v:Destroy()
 	end
 end
