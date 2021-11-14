@@ -37,8 +37,8 @@ function Ripple(obj)
 		local Circle = Instance.new("ImageLabel")
 		Circle.Name = "Circle"
 		Circle.Parent = obj
-		Circle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		Circle.BackgroundTransparency = 1.000
+		Circle.BackgroundColor3 = Color3.fromRGB(150,150,150)
+		Circle.BackgroundTransparency = 0.3
 		Circle.ZIndex = 10
 		Circle.Image = "rbxassetid://266543268"
 		Circle.ImageColor3 = Color3.fromRGB(150,150,150)
@@ -553,6 +553,7 @@ function lib:CreateMain(title)
 			NormalButtonWithTextEntryTextBox.Text = "Example"
 			NormalButtonWithTextEntryTextBox.TextColor3 = Color3.fromRGB(132, 132, 132)
 			NormalButtonWithTextEntryTextBox.TextSize = 14.000
+			NormalButtonWithTextEntryTextBox.ZIndex = 11
 
 			NormalButtonWithTextEntryTextBoxCorner.CornerRadius = UDim.new(0, 2)
 			NormalButtonWithTextEntryTextBoxCorner.Name = "NormalButtonWithTextEntryTextBoxCorner"
