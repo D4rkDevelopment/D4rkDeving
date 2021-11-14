@@ -265,7 +265,7 @@ function ui:CreateUi(title)
 			for i,v in next, PagesFolder:GetChildren() do
 				v.Visible = false
 			end 
-			Page.Visible = true
+			PageContainer.Visible = true
 
 			for i,v in next, AllTabBtns:GetChildren() do
 				if v:IsA("TextButton") then
