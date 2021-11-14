@@ -361,14 +361,6 @@ function lib:CreateMain(title)
 				Ripple(NormalButton)
 				pcall(callback)
 			end)
-			
-			NormalButton.MouseEnter:Connect(function()
-				TweenService:Create(NormalButton,TweenInfo.new(.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundColor3 = Color3.fromRGB(45,45,45)}):Play()
-			end)
-
-			NormalButton.MouseLeave:Connect(function()
-				TweenService:Create(NormalButton,TweenInfo.new(.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundColor3 = Color3.fromRGB(42, 42, 42)}):Play()
-			end)
 			PageContainer.CanvasSize = UDim2.new(0, 0, 0, PageContainerListing.AbsoluteContentSize.Y)
 			NormalButtonCorner.CornerRadius = UDim.new(0, 3)
 			NormalButtonCorner.Name = "NormalButtonCorner"
@@ -402,18 +394,23 @@ function lib:CreateMain(title)
 				ToggleButton.Font = Enum.Font.SourceSans
 				ToggleButton.Text = ""
 				ToggleButton.TextColor3 = Color3.fromRGB(0, 0, 0)
-				ToggleButton.TextSize = 14.000
+			ToggleButton.TextSize = 14.000
+			ToggleButton.ClipsDescendants = true
 			ToggleButton.MouseButton1Click:Connect(function()
+				local tog = false
 				Ripple(ToggleButton)
-					local toggled = false
-					if toggled == false then
-						toggled = true
-						TweenService:Create(ToggleSquare,TweenInfo.new(.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundColor3 = Color3.fromRGB(35, 35, 35)}):Play()
-					elseif toggled == true then
-						toggled = false
-						TweenService:Create(ToggleSquare,TweenInfo.new(.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundColor3 = Color3.fromRGB(19, 19, 19)}):Play()
-					end
-				end)
+				tog = not tog
+				callback(tog)
+				if tog then
+					game.TweenService:Create(ToggleSquare, TweenInfo.new(0.15, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+						BackgroundColor3 = Color3.fromRGB(35,35,35)
+					}):Play()
+				else
+					game.TweenService:Create(ToggleSquare, TweenInfo.new(0.15, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+						BackgroundColor3 = Color3.fromRGB(19,19,19)
+					}):Play()
+				end
+			end)
 
 				ToggleButtonCorner.CornerRadius = UDim.new(0, 3)
 				ToggleButtonCorner.Name = "ToggleButtonCorner"
@@ -457,7 +454,6 @@ function lib:CreateMain(title)
 			SliderValue.Parent = Slider
 			SliderValue.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 			SliderValue.BackgroundTransparency = 1.000
-			SliderValue.Position = UDim2.new(0.531615913, 0, 0.0956966579, 0)
 			SliderValue.Size = UDim2.new(0, 192, 0, 14)
 			SliderValue.Font = Enum.Font.Gotham
 			SliderValue.Text = tostring(start and math.floor((start / max) * (max - min) + min) or 0)
@@ -491,6 +487,7 @@ function lib:CreateMain(title)
 			SliderBack.BackgroundColor3 = Color3.fromRGB(18, 18, 18)
 			SliderBack.Position = UDim2.new(0.027999986, 0, 0.626000047, 0)
 			SliderBack.Size = UDim2.new(0, 404, 0, 7)
+			SliderBack.AnchorPoint = Vector2.new(0.5, 0)
 
 			SliderBackCorner.CornerRadius = UDim.new(0, 2)
 			SliderBackCorner.Name = "SliderBackCorner"
@@ -499,14 +496,13 @@ function lib:CreateMain(title)
 			Slide.Name = "Slide"
 			Slide.Parent = SliderBack
 			Slide.BackgroundColor3 = Color3.fromRGB(26, 26, 26)
-			Slide.Size = UDim2.new(0.202970296, 100, 1, 0)
-
+			Slide.Size = UDim2.new((start or 0) / max, 0, 1, 0)
 			SlideCorner.CornerRadius = UDim.new(0, 2)
 			SlideCorner.Name = "SlideCorner"
 			SlideCorner.Parent = Slide
 			
 			local function move(Input)
-				local XSize = math.clamp((Input.Position.X - Slide.AbsolutePosition.X) / Slide.AbsoluteSize.X, 0, 1)
+				local XSize = math.clamp((Input.Position.X - SliderBack.AbsolutePosition.X) / SliderBack.AbsoluteSize.X, 0, 1)
 				local Increment = inc and (max / ((max - min) / (inc * 4))) or 
 					(max >= 50 and max / ((max - min) / 4)) or 
 					(max >= 25 and max / ((max - min) / 2)) or 
