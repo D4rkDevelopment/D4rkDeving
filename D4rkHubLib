@@ -229,13 +229,14 @@ function ui:CreateUi(title)
 		local PageContainerListing = Instance.new("UIListLayout")
 		
 		Page.Name = "Page"
-		Page.Parent = PagesBack
+		Page.Parent = PagesFolder
 		Page.AnchorPoint = Vector2.new(0.5, 0.5)
 		Page.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 		Page.BackgroundTransparency = 1.000
 		Page.Position = UDim2.new(0.5, 0, 0.5, 0)
 		Page.Size = UDim2.new(0, 447, 0, 326)
 		Page.Visible = false
+		Page.ZIndex = 99
 
 		PageContainer.Name = "PageContainer"
 		PageContainer.Parent = Page
