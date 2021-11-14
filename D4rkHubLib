@@ -365,7 +365,6 @@ function ui:CreateUi(title)
 			NormalButton.TextSize = 14.000
 			NormalButton.ClipsDescendants = true
 			NormalButton.MouseButton1Click:Connect(function()
-				Ripple(NormalButton)
 				callback()
 			end)
 
@@ -408,7 +407,6 @@ function ui:CreateUi(title)
 			ToggleButton.TextSize = 14.000
 			ToggleButton.ClipsDescendants = true
 			ToggleButton.MouseButton1Click:Connect(function()
-				Ripple(ToggleButton)
 				toggled = not toggled
 				callback(toggled)
 				if toggled then 
@@ -471,7 +469,6 @@ function ui:CreateUi(title)
 			NormalButtonWithTextEntry.TextSize = 14.000
 			NormalButtonWithTextEntry.ClipsDescendants = true
 			NormalButtonWithTextEntry.MouseButton1Click:Connect(function()
-				Ripple(NormalButtonWithTextEntry)
 				callback()
 			end)
 
