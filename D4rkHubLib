@@ -25,34 +25,7 @@ local ContentProvider = game:GetService("ContentProvider")
 local LocalPlayer = game:GetService("Players").LocalPlayer
 local Mouse = LocalPlayer:GetMouse()
 
-local function GetXY(obj)
-	local Max, May = obj.AbsoluteSize.X,obj.AbsoluteSize.Y
-	local Px, Py = math.clamp(Mouse.X - obj.AbsolutePosition.X, 0, Max), math.clamp(Mouse.Y - obj.AbsolutePosition.Y, 0, May)
-	return Px/Max, Py/May
-end
 
-function Ripple(obj)
-	spawn(function()
-		local PX, PY = GetXY(obj)
-		local Circle = Instance.new("ImageLabel")
-		Circle.Name = "Circle"
-		Circle.Parent = obj
-		Circle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		Circle.BackgroundTransparency = 1.000
-		Circle.ZIndex = 10
-		Circle.Image = "rbxassetid://266543268"
-		Circle.ImageColor3 = Color3.fromRGB(210,210,210)
-		Circle.ImageTransparency = 0.6
-		local NewX, NewY = Mouse.X - Circle.AbsolutePosition.X, Mouse.Y - Circle.AbsolutePosition.Y
-		Circle.Position = UDim2.new(0, NewX, 0, NewY)
-		local Size = obj.AbsoluteSize.X
-		TweenService:Create(Circle, TweenInfo.new(.2), {Position = UDim2.fromScale(PX,PY) - UDim2.fromOffset(Size/2,Size/2), ImageTransparency = 1, Size = UDim2.fromOffset(Size,Size)}):Play()
-		spawn(function()
-			wait(.3)
-			Circle:Destroy()
-		end)
-	end)
-end
 
 local function MakeDraggable(topbarobject, object) 
 	pcall(function()
