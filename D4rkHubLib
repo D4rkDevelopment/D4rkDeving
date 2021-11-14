@@ -46,7 +46,7 @@ function Ripple(obj)
 		local NewX, NewY = Mouse.X - Circle.AbsolutePosition.X, Mouse.Y - Circle.AbsolutePosition.Y
 		Circle.Position = UDim2.new(0, NewX, 0, NewY)
 		local Size = obj.AbsoluteSize.X
-		TweenService:Create(Circle, TweenInfo.new(1), {Position = UDim2.fromScale(PX,PY) - UDim2.fromOffset(Size/2,Size/2), ImageTransparency = 1, Size = UDim2.fromOffset(Size,Size)}):Play()
+		TweenService:Create(Circle, TweenInfo.new(.4), {Position = UDim2.fromScale(PX,PY) - UDim2.fromOffset(Size/2,Size/2), ImageTransparency = 1, Size = UDim2.fromOffset(Size,Size)}):Play()
 		spawn(function()
 			wait(1.2)
 			Circle:Destroy()
@@ -520,6 +520,7 @@ function lib:CreateMain(title)
 			NormalButtonWithTextEntry.Text = ""
 			NormalButtonWithTextEntry.TextColor3 = Color3.fromRGB(0, 0, 0)
 			NormalButtonWithTextEntry.TextSize = 14.000
+			NormalButtonWithTextEntry.ClipsDescendants = true
 			NormalButtonWithTextEntry.MouseButton1Click:Connect(function()
 				Ripple(NormalButtonWithTextEntry)
 				pcall(callback)
