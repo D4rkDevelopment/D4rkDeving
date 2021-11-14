@@ -450,6 +450,7 @@ function lib:CreateWindow(title)
 			ContainerFrame.CanvasSize = UDim2.new(0, 0, 0, ContainerFrameListing.AbsoluteContentSize.Y)
 		end
 		function pages:CreateSlider(slidertext,min,max,start,inc,callback)
+			local dragging = false
 			local Slider = Instance.new("Frame")
 			local SliderCorner = Instance.new("UICorner")
 			local SliderFrame = Instance.new("Frame")
@@ -477,7 +478,7 @@ function lib:CreateWindow(title)
 			SliderCurrentFrame.Name = "SliderCurrentFrame"
 			SliderCurrentFrame.Parent = SliderFrame
 			SliderCurrentFrame.BackgroundColor3 = Color3.fromRGB(26, 26, 26)
-			SliderCurrentFrame.Size = UDim2.new(0.5, 0,1, 0)
+			SliderCurrentFrame.Size = UDim2.new((start or 0) / max, 0, 1, 0)
 
 			SliderCurrentFrameCorner.CornerRadius = UDim.new(0, 2)
 			SliderCurrentFrameCorner.Name = "SliderCurrentFrameCorner"
@@ -506,10 +507,45 @@ function lib:CreateWindow(title)
 			Value.Position = UDim2.new(0.531615913, 0, 0.0956966579, 0)
 			Value.Size = UDim2.new(0, 192, 0, 14)
 			Value.Font = Enum.Font.Gotham
-			Value.Text = '50%'
+			Value.Text = tostring(start and math.floor((start / max) * (max - min) + min) or 0)
 			Value.TextColor3 = Color3.fromRGB(139, 139, 139)
 			Value.TextSize = 12.000
 			Value.TextXAlignment = Enum.TextXAlignment.Right
+			local function move(Input)
+				local XSize = math.clamp((Input.Position.X - SliderFrame.AbsolutePosition.X) / SliderFrame.AbsoluteSize.X, 0, 1)
+				local Increment = inc and (max / ((max - min) / (inc * 4))) or 
+					(max >= 50 and max / ((max - min) / 4)) or 
+					(max >= 25 and max / ((max - min) / 2)) or 
+					(max / (max - min))
+
+				local SizeRounded = UDim2.new((math.round(XSize * ((max / Increment) * 4)) / ((max / Increment) * 4)), 0, 1, 0)
+				SliderCurrentFrame:TweenSize(SizeRounded, Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .2, true)
+
+				local Val = math.round((((SizeRounded.X.Scale * max) / max) * (max - min) + min) * 20) / 20
+				Value.Text = tostring(Val)
+				pcall(callback, tonumber(Val))
+			end
+			SliderFrame.InputBegan:Connect(
+				function(input)
+					if input.UserInputType == Enum.UserInputType.MouseButton1 then
+						dragging = true
+					end
+				end
+			)
+			SliderFrame.InputEnded:Connect(
+				function(input)
+					if input.UserInputType == Enum.UserInputType.MouseButton1 then
+						dragging = false
+					end
+				end
+			)
+			game:GetService("UserInputService").InputChanged:Connect(
+			function(input)
+				if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+					move(input)
+				end
+			end
+			)
 			ContainerFrame.CanvasSize = UDim2.new(0, 0, 0, ContainerFrameListing.AbsoluteContentSize.Y)
 		end
 		function pages:CreateButtonWithText(text, callback)
