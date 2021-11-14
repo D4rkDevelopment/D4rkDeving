@@ -547,7 +547,7 @@ function lib:CreateMain(title)
 			NormalButtonWithTextEntryTextBox.Name = "NormalButtonWithTextEntryTextBox"
 			NormalButtonWithTextEntryTextBox.Parent = NormalButtonWithTextEntry
 			NormalButtonWithTextEntryTextBox.BackgroundColor3 = Color3.fromRGB(19, 19, 19)
-			NormalButtonWithTextEntryTextBox.Position = UDim2.new(0.725995302, 0, 0.13333334, 0)
+			NormalButtonWithTextEntryTextBox.Position = UDim2.new(0.726, 0,0.133, 0)
 			NormalButtonWithTextEntryTextBox.Size = UDim2.new(0, 109, 0, 22)
 			NormalButtonWithTextEntryTextBox.Font = Enum.Font.Gotham
 			NormalButtonWithTextEntryTextBox.Text = "Example"
