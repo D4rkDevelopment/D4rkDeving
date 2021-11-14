@@ -41,7 +41,7 @@ function Ripple(obj)
 		Circle.BackgroundTransparency = 1.000
 		Circle.ZIndex = 10
 		Circle.Image = "rbxassetid://266543268"
-		Circle.ImageColor3 = Color3.fromRGB(210,210,210)
+		Circle.ImageColor3 = Color3.fromRGB(150,150,150)
 		Circle.ImageTransparency = 0.6
 		local NewX, NewY = Mouse.X - Circle.AbsolutePosition.X, Mouse.Y - Circle.AbsolutePosition.Y
 		Circle.Position = UDim2.new(0, NewX, 0, NewY)
@@ -522,6 +522,7 @@ function lib:CreateMain(title)
 			NormalButtonWithTextEntry.TextSize = 14.000
 			NormalButtonWithTextEntry.ClipsDescendants = true
 			NormalButtonWithTextEntry.MouseButton1Click:Connect(function()
+				NormalButtonWithTextEntry.ClipsDescendants = true
 				Ripple(NormalButtonWithTextEntry)
 				pcall(callback)
 			end)
