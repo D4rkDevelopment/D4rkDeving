@@ -269,12 +269,12 @@ function ui:CreateUi(title)
 
 			for i,v in next, AllTabBtns:GetChildren() do
 				if v:IsA("TextButton") then
-					game.TweenService:Create(v, TweenInfo.new(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+					game.TweenService:Create(v, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
 						BackgroundColor3 = Color3.fromRGB(20,20,20)
 					}):Play()
 				end
 			end
-			game.TweenService:Create(TabBtn, TweenInfo.new(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+			game.TweenService:Create(TabBtn, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
 				BackgroundColor3 = Color3.fromRGB(30,30,30)
 			}):Play()
 		end)
@@ -442,6 +442,8 @@ function ui:CreateUi(title)
 			NormalButtonWithTextEntryTextBox.Position = UDim2.new(0.725995302, 0, 0.13333334, 0)
 			NormalButtonWithTextEntryTextBox.Size = UDim2.new(0, 109, 0, 22)
 			NormalButtonWithTextEntryTextBox.Font = Enum.Font.Gotham
+			NormalButtonWithTextEntryTextBox.PlaceholderColor3 = Color3.fromRGB(39, 39, 39)
+			NormalButtonWithTextEntryTextBox.PlaceholderText = "Text Entry"
 			NormalButtonWithTextEntryTextBox.Text = ""
 			NormalButtonWithTextEntryTextBox.TextColor3 = Color3.fromRGB(132, 132, 132)
 			NormalButtonWithTextEntryTextBox.TextSize = 14.000
