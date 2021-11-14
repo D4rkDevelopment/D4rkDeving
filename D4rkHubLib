@@ -329,20 +329,22 @@ function lib:CreateWindow(title)
 		TabText.TextXAlignment = Enum.TextXAlignment.Left
 		
 		Tab.MouseButton1Click:Connect(function()
-			for i,v in next, TabList:GetChildren() do
-				if v.Name == "Tab" then
-					v.BackgroundTransparency = 1
-					v.TabText.TextColor3 = Color3.fromRGB(200,200,200)
+			for i,v in next, ContainerFolder:GetChildren() do -- We get all the pages that we added
+				v.Visible = false	-- then we make them invisible 
+			end 
+			ContainerFrame.Visible = true	-- We make current page visible but not others
+
+			--Animations Below  -- Optional
+			for i,v in next, TabListHolder:GetChildren() do	-- We get all the elements inside the frame
+				if v:IsA("TextButton") then -- We can't animate UIListLayout, so we check if its a TextButton
+					game.TweenService:Create(v, TweenInfo.new(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+						BackgroundColor3 = Color3.fromRGB(20,20,20) -- We animate other Tab Buttons and making the current one seem Checked
+					}):Play()
 				end
-				Tab.BackgroundTransparency = 0
-				TabText.TextColor3 = Color3.fromRGB(255,255,255)
 			end
-			for i,v in next, ContainerFolder:GetChildren() do
-				if v:IsA("ScrollingFrame") then
-					v.Visible = false
-				end
-				ContainerFrame.Visible = true
-			end
+			game.TweenService:Create(Tab, TweenInfo.new(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+				BackgroundColor3 = Color3.fromRGB(30,30,30) -- We animate other Tab Buttons and making the current one seem Checked
+			}):Play()
 		end)
 		
 		local pages = {}
