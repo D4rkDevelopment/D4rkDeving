@@ -1,5 +1,5 @@
 for _, v in pairs(game:GetService("CoreGui"):GetChildren()) do
-	if v:FindFirstChild("MainFrame") then
+	if v:FindFirstChild("D4rkHub") then
 		v:Destroy()
 	end
 end
@@ -548,6 +548,20 @@ function lib:CreateWindow(title)
 			end
 			)
 			ContainerFrame.CanvasSize = UDim2.new(0, 0, 0, ContainerFrameListing.AbsoluteContentSize.Y)
+		end
+		function pages:CreateLabel(text)
+			local Label = Instance.new("TextLabel")
+			
+			Label.Name = "Label"
+			Label.Parent = ContainerFrame
+			Label.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			Label.BackgroundTransparency = 1.000
+			Label.Position = UDim2.new(0, 0, 0.474842757, 0)
+			Label.Size = UDim2.new(0, 427, 0, 30)
+			Label.Font = Enum.Font.Gotham
+			Label.TextColor3 = Color3.fromRGB(140, 140, 140)
+			Label.TextSize = 14.000
+			Label.Text = text
 		end
 		return pages
 	end
