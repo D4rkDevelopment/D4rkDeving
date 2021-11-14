@@ -1,5 +1,5 @@
 for _, v in pairs(game:GetService("CoreGui"):GetChildren()) do
-	if v:FindFirstChild("MainFrame") then
+	if v:FindFirstChild("D4rkHub") then
 		v:Destroy()
 	end
 end
@@ -548,77 +548,6 @@ function lib:CreateWindow(title)
 			end
 			)
 			ContainerFrame.CanvasSize = UDim2.new(0, 0, 0, ContainerFrameListing.AbsoluteContentSize.Y)
-		end
-		function pages:CreateButtonWithText(text, entry, callback)
-			local NormalButtonWithTextEntry = Instance.new("TextButton")
-			local NormalButtonWithTextEntryCorner = Instance.new("UICorner")
-			local NormalButtonWithTextEntryText = Instance.new("TextLabel")
-			local NormalButtonWithTextEntryTextBox = Instance.new("TextBox")
-			local NormalButtonWithTextEntryTextBoxCorner = Instance.new("UICorner")
-			
-			NormalButtonWithTextEntry.Name = "NormalButtonWithTextEntry"
-			NormalButtonWithTextEntry.Parent = ContainerFrame
-			NormalButtonWithTextEntry.BackgroundColor3 = Color3.fromRGB(22, 22, 22)
-			NormalButtonWithTextEntry.Size = UDim2.new(1, 0,0, 30)
-			NormalButtonWithTextEntry.AutoButtonColor = false
-			NormalButtonWithTextEntry.Font = Enum.Font.SourceSans
-			NormalButtonWithTextEntry.Text = ""
-			NormalButtonWithTextEntry.TextColor3 = Color3.fromRGB(0, 0, 0)
-			NormalButtonWithTextEntry.TextSize = 14.000
-			NormalButtonWithTextEntry.ClipsDescendants = true
-			NormalButtonWithTextEntry.MouseButton1Click:Connect(function()
-				Ripple(NormalButtonWithTextEntry)
-				pcall(callback)
-			end)
-
-			NormalButtonWithTextEntryCorner.CornerRadius = UDim.new(0, 3)
-			NormalButtonWithTextEntryCorner.Name = "NormalButtonWithTextEntryCorner"
-			NormalButtonWithTextEntryCorner.Parent = NormalButtonWithTextEntry
-
-			NormalButtonWithTextEntryText.Name = "NormalButtonWithTextEntryText"
-			NormalButtonWithTextEntryText.Parent = NormalButtonWithTextEntry
-			NormalButtonWithTextEntryText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			NormalButtonWithTextEntryText.BackgroundTransparency = 1.000
-			NormalButtonWithTextEntryText.Position = UDim2.new(0.0281030443, 0, 0, 0)
-			NormalButtonWithTextEntryText.Size = UDim2.new(0, 412, 1, 0)
-			NormalButtonWithTextEntryText.Font = Enum.Font.Gotham
-			NormalButtonWithTextEntryText.Text = text
-			NormalButtonWithTextEntryText.TextColor3 = Color3.fromRGB(139, 139, 139)
-			NormalButtonWithTextEntryText.TextSize = 14.000
-			NormalButtonWithTextEntryText.TextXAlignment = Enum.TextXAlignment.Left
-
-			NormalButtonWithTextEntryTextBox.Name = "NormalButtonWithTextEntryTextBox"
-			NormalButtonWithTextEntryTextBox.Parent = NormalButtonWithTextEntry
-			NormalButtonWithTextEntryTextBox.BackgroundColor3 = Color3.fromRGB(19, 19, 19)
-			NormalButtonWithTextEntryTextBox.Position = UDim2.new(0.725995302, 0, 0.13333334, 0)
-			NormalButtonWithTextEntryTextBox.Size = UDim2.new(0, 109, 0, 22)
-			NormalButtonWithTextEntryTextBox.Font = Enum.Font.Gotham
-			NormalButtonWithTextEntryTextBox.PlaceholderColor3 = Color3.fromRGB(39, 39, 39)
-			NormalButtonWithTextEntryTextBox.PlaceholderText = "Text Entry"
-			NormalButtonWithTextEntryTextBox.Text = ""
-			NormalButtonWithTextEntryTextBox.TextColor3 = Color3.fromRGB(132, 132, 132)
-			NormalButtonWithTextEntryTextBox.TextSize = 14.000
-			NormalButtonWithTextEntryTextBox.ZIndex = 11
-
-			NormalButtonWithTextEntryTextBoxCorner.CornerRadius = UDim.new(0, 2)
-			NormalButtonWithTextEntryTextBoxCorner.Name = "NormalButtonWithTextEntryTextBoxCorner"
-			NormalButtonWithTextEntryTextBoxCorner.Parent = NormalButtonWithTextEntryTextBox
-			
-			ContainerFrame.CanvasSize = UDim2.new(0, 0, 0, ContainerFrameListing.AbsoluteContentSize.Y)
-		end
-		function pages:CreateLabel(text)
-			local Label = Instance.new("TextLabel")
-			
-			Label.Name = "Label"
-			Label.Parent = ContainerFrame
-			Label.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			Label.BackgroundTransparency = 1.000
-			Label.Position = UDim2.new(0, 0, 0.474842757, 0)
-			Label.Size = UDim2.new(0, 427, 0, 30)
-			Label.Font = Enum.Font.Gotham
-			Label.TextColor3 = Color3.fromRGB(140, 140, 140)
-			Label.TextSize = 14.000
-			Label.Text = text
 		end
 		return pages
 	end
