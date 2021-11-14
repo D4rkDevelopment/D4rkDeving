@@ -597,6 +597,11 @@ function lib:CreateWindow(title)
 			NormalButtonWithTextEntryTextBoxCorner.CornerRadius = UDim.new(0, 2)
 			NormalButtonWithTextEntryTextBoxCorner.Name = "NormalButtonWithTextEntryTextBoxCorner"
 			NormalButtonWithTextEntryTextBoxCorner.Parent = NormalButtonWithTextEntryTextBox
+			
+			ContainerFrame.CanvasSize = UDim2.new(0, 0, 0, ContainerFrameListing.AbsoluteContentSize.Y)
 		end
+		return pages
 	end
+	return tabs
 end
+return lib
