@@ -350,7 +350,7 @@ function lib:CreateMain(title)
 			NormalButton.Name = "NormalButton"
 			NormalButton.Parent = PageContainer
 			NormalButton.BackgroundColor3 = Color3.fromRGB(22, 22, 22)
-			NormalButton.Size = UDim2.new(1, 0, -0.0306748468, 50)
+			NormalButton.Size = UDim2.new(1, 0,-0.031, 50)
 			NormalButton.AutoButtonColor = false
 			NormalButton.Font = Enum.Font.SourceSans
 			NormalButton.Text = ""
@@ -389,7 +389,7 @@ function lib:CreateMain(title)
 				ToggleButton.Name = "ToggleButton"
 				ToggleButton.Parent = PageContainer
 				ToggleButton.BackgroundColor3 = Color3.fromRGB(22, 22, 22)
-				ToggleButton.Size = UDim2.new(1, 0, -0.0306748468, 50)
+				ToggleButton.Size = UDim2.new(1, 0,-0.031, 50)
 				ToggleButton.AutoButtonColor = false
 				ToggleButton.Font = Enum.Font.SourceSans
 				ToggleButton.Text = ""
@@ -466,7 +466,7 @@ function lib:CreateMain(title)
 			Slider.Name = "Slider"
 			Slider.Parent = PageContainer
 			Slider.BackgroundColor3 = Color3.fromRGB(22, 22, 22)
-			Slider.Size = UDim2.new(1, 0, -0.0125786159, 50)
+			Slider.Size = UDim2.new(1, 0,-0.013, 50)
 
 			SliderCorner.CornerRadius = UDim.new(0, 3)
 			SliderCorner.Name = "SliderCorner"
@@ -515,7 +515,7 @@ function lib:CreateMain(title)
 			NormalButtonWithTextEntry.Name = "NormalButtonWithTextEntry"
 			NormalButtonWithTextEntry.Parent = PageContainer
 			NormalButtonWithTextEntry.BackgroundColor3 = Color3.fromRGB(22, 22, 22)
-			NormalButtonWithTextEntry.Size = UDim2.new(1, 0, -0.0306748468, 50)
+			NormalButtonWithTextEntry.Size = UDim2.new(1, 0,-0.031, 50)
 			NormalButtonWithTextEntry.AutoButtonColor = false
 			NormalButtonWithTextEntry.Font = Enum.Font.SourceSans
 			NormalButtonWithTextEntry.Text = ""
