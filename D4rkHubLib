@@ -549,7 +549,7 @@ function lib:CreateWindow(title)
 			)
 			ContainerFrame.CanvasSize = UDim2.new(0, 0, 0, ContainerFrameListing.AbsoluteContentSize.Y)
 		end
-		function pages:CreateButtonWithText(text, callback)
+		function pages:CreateButtonWithText(text, callback, input)
 			local NormalButtonWithTextEntry = Instance.new("TextButton")
 			local NormalButtonWithTextEntryCorner = Instance.new("UICorner")
 			local NormalButtonWithTextEntryText = Instance.new("TextLabel")
@@ -595,7 +595,7 @@ function lib:CreateWindow(title)
 			NormalButtonWithTextEntryTextBox.Font = Enum.Font.Gotham
 			NormalButtonWithTextEntryTextBox.PlaceholderColor3 = Color3.fromRGB(39, 39, 39)
 			NormalButtonWithTextEntryTextBox.PlaceholderText = "Text Entry"
-			NormalButtonWithTextEntryTextBox.Text = ""
+			NormalButtonWithTextEntryTextBox.Text = input
 			NormalButtonWithTextEntryTextBox.TextColor3 = Color3.fromRGB(132, 132, 132)
 			NormalButtonWithTextEntryTextBox.TextSize = 14.000
 			NormalButtonWithTextEntryTextBox.ZIndex = 11
