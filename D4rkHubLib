@@ -191,14 +191,15 @@ function lib:CreateWindow(title)
 	TabListBtn.Image = "http://www.roblox.com/asset/?id=6031097225"
 	TabListBtn.ImageColor3 = Color3.fromRGB(200, 200, 200)
 	TabListBtn.SliceScale = 10.000
+	TabListBtn.ClipsDescendants = true
 	local open = false
 	TabListBtn.MouseButton1Click:Connect(function()
 		if open == false then
 			open = true
-			TabListBtn:TweenSize(UDim2.new(0, 147,0, 362), "Out", "Sine", .2, true)
+			TabList:TweenSize(UDim2.new(0, 147,0, 362), "Out", "Sine", .2, true)
 		elseif open == true then
 			open = false
-			TabListBtn:TweenSize(UDim2.new(0, 0,0, 362), "Out", "Sine", .2, true)
+			TabList:TweenSize(UDim2.new(0, 0,0, 362), "Out", "Sine", .2, true)
 		end
 	end)
 
@@ -443,7 +444,7 @@ function lib:CreateWindow(title)
 			ToggleSquareCorner.Parent = ToggleSquare
 			ContainerFrame.CanvasSize = UDim2.new(0, 0, 0, ContainerFrameListing.AbsoluteContentSize.Y)
 		end
-		function pages:Slider(slidertext,min,max,start,inc,callback)
+		function pages:CreateSlider(slidertext,min,max,start,inc,callback)
 			local dragging = false
 			local Slider = Instance.new("Frame")
 			local SliderCorner = Instance.new("UICorner")
