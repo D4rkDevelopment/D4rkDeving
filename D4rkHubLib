@@ -189,7 +189,6 @@ function ui:CreateUi(title)
 	PagesBackCorner.CornerRadius = UDim.new(0, 3)
 	PagesBackCorner.Name = "PagesBackCorner"
 	PagesBackCorner.Parent = PagesBack
-	
 	PagesFolder.Name = "PagesFolder"
 	PagesFolder.Parent = PagesBack
 
