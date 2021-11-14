@@ -108,6 +108,7 @@ function lib:CreateWindow(title)
 	local TabListCorner = Instance.new("UICorner")
 	local TabListHolder = Instance.new("Frame")
 	local TabListHolderListing = Instance.new("UIListLayout")
+	MakeDraggable(TopFrame,MainFrame)
 	
 	D4rkHub.Name = "D4rkHub"
 	D4rkHub.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
@@ -403,6 +404,7 @@ function lib:CreateWindow(title)
 			Toggle.TextSize = 14.000
 			Toggle.ClipsDescendants = true
 			Toggle.MouseButton1Click:Connect(function()
+				Ripple(Toggle)
 				toggled = not toggled
 				if toggled then
 					game.TweenService:Create(ToggleSquare, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
@@ -506,42 +508,6 @@ function lib:CreateWindow(title)
 			Value.TextColor3 = Color3.fromRGB(139, 139, 139)
 			Value.TextSize = 12.000
 			Value.TextXAlignment = Enum.TextXAlignment.Right
-			
-			local function move(Input)
-				local XSize = math.clamp((Input.Position.X - SliderFrame.AbsolutePosition.X) / SliderFrame.AbsoluteSize.X, 0, 1)
-				local Increment = inc and (max / ((max - min) / (inc * 4))) or 
-					(max >= 50 and max / ((max - min) / 4)) or 
-					(max >= 25 and max / ((max - min) / 2)) or 
-					(max / (max - min))
-
-				local SizeRounded = UDim2.new((math.round(XSize * ((max / Increment) * 4)) / ((max / Increment) * 4)), 0, 1, 0)
-				SliderCurrentFrame:TweenSize(SizeRounded, Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .2, true)
-
-				local Val = math.round((((SizeRounded.X.Scale * max) / max) * (max - min) + min) * 20) / 20
-				Value.Text = tostring(Val)
-				pcall(callback, tonumber(Val))
-			end
-			SliderFrame.InputBegan:Connect(
-				function(input)
-					if input.UserInputType == Enum.UserInputType.MouseButton1 then
-						dragging = true
-					end
-				end
-			)
-			SliderFrame.InputEnded:Connect(
-				function(input)
-					if input.UserInputType == Enum.UserInputType.MouseButton1 then
-						dragging = false
-					end
-				end
-			)
-			game:GetService("UserInputService").InputChanged:Connect(
-			function(input)
-				if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
-					move(input)
-				end
-			end
-			)
 			ContainerFrame.CanvasSize = UDim2.new(0, 0, 0, ContainerFrameListing.AbsoluteContentSize.Y)
 		end
 		function pages:CreateButtonWithText(text, callback)
