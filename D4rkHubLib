@@ -479,6 +479,7 @@ function lib:CreateWindow(title)
 			SliderCurrentFrame.Parent = SliderFrame
 			SliderCurrentFrame.BackgroundColor3 = Color3.fromRGB(26, 26, 26)
 			SliderCurrentFrame.Size = UDim2.new((start or 0) / max, 0, 1, 0)
+			SliderCurrentFrame.BorderSizePixel = 0
 
 			SliderCurrentFrameCorner.CornerRadius = UDim.new(0, 2)
 			SliderCurrentFrameCorner.Name = "SliderCurrentFrameCorner"
