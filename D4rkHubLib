@@ -4,19 +4,7 @@ for _, v in pairs(game:GetService("CoreGui"):GetChildren()) do
 	end
 end
 
-game:GetService("UserInputService").InputBegan:connect(
-function(key, gpe)
-	if key.KeyCode == Enum.KeyCode.RightShift then
-		pcall(
-			function()
-				for i, v in pairs(game.CoreGui.D4rkHub:GetChildren()) do
-					v.Visible = not v.Visible
-				end
-			end
-		)
-	end
-end
-)
+
 local ui = {}
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
