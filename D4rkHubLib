@@ -454,9 +454,10 @@ function lib:CreateMain(title)
 			SliderValue.Parent = Slider
 			SliderValue.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 			SliderValue.BackgroundTransparency = 1.000
+			SliderValue.Position = UDim2.new(0.531615913, 0, 0.0956966579, 0)
 			SliderValue.Size = UDim2.new(0, 192, 0, 14)
 			SliderValue.Font = Enum.Font.Gotham
-			SliderValue.Text = slidertext
+			SliderValue.Text = tostring(start and math.floor((start / max) * (max - min) + min) or 0)
 			SliderValue.TextColor3 = Color3.fromRGB(139, 139, 139)
 			SliderValue.TextSize = 12.000
 			SliderValue.TextXAlignment = Enum.TextXAlignment.Right
@@ -500,6 +501,9 @@ function lib:CreateMain(title)
 			SlideCorner.CornerRadius = UDim.new(0, 2)
 			SlideCorner.Name = "SlideCorner"
 			SlideCorner.Parent = Slide
+			
+			PageContainer.CanvasSize = UDim2.new(0, 0, 0, PageContainerListing.AbsoluteContentSize.Y)
+		end
 		function pages:CreateButtonWithText(buttonwithtexttext, callback)
 			local NormalButtonWithTextEntry = Instance.new("TextButton")
 			local NormalButtonWithTextEntryCorner = Instance.new("UICorner")
