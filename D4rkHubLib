@@ -520,7 +520,7 @@ function lib:CreateWindow(title)
 					(max / (max - min))
 
 				local SizeRounded = UDim2.new((math.round(XSize * ((max / Increment) * 4)) / ((max / Increment) * 4)), 0, 1, 0)
-				SliderCurrentFrame:TweenSize(SizeRounded, Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .2, true)
+				SliderCurrentFrame:TweenSize(SizeRounded, Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .1, true)
 
 				local Val = math.round((((SizeRounded.X.Scale * max) / max) * (max - min) + min) * 20) / 20
 				Value.Text = tostring(Val)
