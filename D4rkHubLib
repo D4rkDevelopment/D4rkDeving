@@ -563,7 +563,7 @@ function lib:CreateWindow(title)
 			Label.TextSize = 14.000
 			Label.Text = text
 		end
-		function pages:Notify(title, text)
+		function lib:Notify(title, text)
 			spawn(function()
 				local NotificationBack = Instance.new("Frame")
 				local NotificationHolderCorner = Instance.new("UICorner")
