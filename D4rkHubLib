@@ -578,7 +578,7 @@ function lib:CreateWindow(title)
 				NotificationBack.Name = "NotificationBack"
 				NotificationBack.Parent = D4rkHub
 				NotificationBack.BackgroundColor3 = Color3.fromRGB(16, 16, 16)
-				NotificationBack.Position = UDim2.new(0, 959, 0, 735)
+				NotificationBack.Position = UDim2.new(0.78, 0,0.3, 503)
 				NotificationBack.Size = UDim2.new(0, 265, 0, 63)
 
 				NotificationHolderCorner.CornerRadius = UDim.new(0, 3)
@@ -646,6 +646,9 @@ function lib:CreateWindow(title)
 				NotificationGlow.SliceCenter = Rect.new(20, 20, 280, 280)
 				
 				TweenService:Create(NotificationBack,TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundTransparency = 0}):Play()
+				TweenService:Create(NotificationHolderCorner,TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundTransparency = 0}):Play()
+				TweenService:Create(NotificationContainer,TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundTransparency = 0}):Play()
+				TweenService:Create(NotificationGlow,TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundTransparency = 0}):Play()
 			end)
 		end
 		return pages
