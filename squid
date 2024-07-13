@@ -1,0 +1,917 @@
+if game.CoreGui:FindFirstChild("Squidhook") then
+	game.CoreGui:FindFirstChild("Squidhook"):Destroy();
+end
+
+local lib = {}
+
+local UserInputService = game:GetService("UserInputService")
+
+local function Drag(drag, frame) 
+	pcall(function()
+		local dragging = false
+		local dragInput, mousePos, framePos
+
+		drag.InputBegan:Connect(function(input)
+			if input.UserInputType == Enum.UserInputType.MouseButton1 then
+				dragging = true
+				mousePos = input.Position
+				framePos = frame.Position
+
+				input.Changed:Connect(function()
+					if input.UserInputState == Enum.UserInputState.End then
+						dragging = false
+					end
+				end)
+			end
+		end)
+
+		drag.InputChanged:Connect(function(input)
+			if input.UserInputType == Enum.UserInputType.MouseMovement then
+				dragInput = input
+			end
+		end)
+
+		UserInputService.InputChanged:Connect(function(input)
+			if input == dragInput and dragging then
+				local delta = input.Position - mousePos
+				frame.Position  = UDim2.new(framePos.X.Scale, framePos.X.Offset + delta.X, framePos.Y.Scale, framePos.Y.Offset + delta.Y)
+			end
+		end)
+	end)
+end
+
+function lib:Window(title)
+	local Squidhook = Instance.new("ScreenGui")
+	Squidhook.Name = "Squidhook"
+	Squidhook.Parent = game.CoreGui
+	Squidhook.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+	
+	local UIBorder1 = Instance.new("Frame")
+	UIBorder1.Name = "UIBorder1"
+	UIBorder1.Parent = Squidhook
+	UIBorder1.AnchorPoint = Vector2.new(0.5, 0.5)
+	UIBorder1.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+	UIBorder1.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	UIBorder1.Position = UDim2.new(0.5, 0, 0.5, 0)
+	UIBorder1.Size = UDim2.new(0, 480, 0, 570)
+	
+	local UIBorder2 = Instance.new("Frame")
+	UIBorder2.Name = "UIBorder2"
+	UIBorder2.Parent = UIBorder1
+	UIBorder2.AnchorPoint = Vector2.new(0.5, 0.5)
+	UIBorder2.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+	UIBorder2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	UIBorder2.Position = UDim2.new(0.5, 0, 0.5, 0)
+	UIBorder2.Size = UDim2.new(1, -4, 1, -4)
+	
+	local UIContainer = Instance.new("Frame")
+	UIContainer.Name = "UIContainer"
+	UIContainer.Parent = UIBorder2
+	UIContainer.AnchorPoint = Vector2.new(0.5, 0.5)
+	UIContainer.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+	UIContainer.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	UIContainer.Position = UDim2.new(0.5, 0, 0.5, 0)
+	UIContainer.Size = UDim2.new(1, 0, 1, 0)
+	
+	local UIMainStuff = Instance.new("Frame")
+	UIMainStuff.Name = "UIMainStuff"
+	UIMainStuff.Parent = UIContainer
+	UIMainStuff.AnchorPoint = Vector2.new(0.5, 0.5)
+	UIMainStuff.BackgroundColor3 = Color3.fromRGB(12, 12, 12)
+	UIMainStuff.BorderColor3 = Color3.fromRGB(60, 60, 60)
+	UIMainStuff.Position = UDim2.new(0.5, 0, 0.513157904, 0)
+	UIMainStuff.Size = UDim2.new(1, -14, 0.973684192, -14)
+	
+	local TopFrameLine = Instance.new("Frame")
+	TopFrameLine.Name = "TopFrameLine"
+	TopFrameLine.Parent = UIMainStuff
+	TopFrameLine.AnchorPoint = Vector2.new(0.5, 0.5)
+	TopFrameLine.BackgroundColor3 = Color3.fromRGB(138, 3, 1)
+	TopFrameLine.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	TopFrameLine.BorderSizePixel = 0
+	TopFrameLine.Position = UDim2.new(0.5, 0, 0, 0)
+	TopFrameLine.Size = UDim2.new(1, 0, 0, 1)
+	
+	local AllPagesOutline = Instance.new("Frame")
+	AllPagesOutline.Name = "AllPagesOutline"
+	AllPagesOutline.Parent = UIMainStuff
+	AllPagesOutline.AnchorPoint = Vector2.new(0.5, 0.5)
+	AllPagesOutline.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+	AllPagesOutline.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	AllPagesOutline.Position = UDim2.new(0.5, 0, 0.519, 0)
+	AllPagesOutline.Size = UDim2.new(1, -14, 0.964, -14)
+	
+	local AllPages = Instance.new("Frame")
+	AllPages.Name = "AllPages"
+	AllPages.Parent = UIMainStuff
+	AllPages.AnchorPoint = Vector2.new(0.5, 0.5)
+	AllPages.BackgroundColor3 = Color3.fromRGB(17, 17, 17)
+	AllPages.BorderColor3 = Color3.fromRGB(60, 60, 60)
+	AllPages.BorderSizePixel = 0
+	AllPages.Position = UDim2.new(0.5, 0, 0.519, 0)
+	AllPages.Size = UDim2.new(0, 446, 0, 502)
+	AllPages.ZIndex = 99
+	
+	local AllPagesFolder = Instance.new("Folder")
+	AllPagesFolder.Name = "AllPagesFolder"
+	AllPagesFolder.Parent = AllPages
+	
+	local TopFrame = Instance.new("Frame")
+	TopFrame.Name = "TopFrame"
+	TopFrame.Parent = UIContainer
+	TopFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+	TopFrame.BorderSizePixel = 0
+	TopFrame.Size = UDim2.new(1, 0, 0, 21)
+	
+	local Title = Instance.new("TextLabel")
+	Title.Name = "Title"
+	Title.Parent = TopFrame
+	Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Title.BackgroundTransparency = 1.000
+	Title.BorderSizePixel = 0
+	Title.Position = UDim2.new(0.0170000866, 0, 0, 0)
+	Title.Size = UDim2.new(0, 460, 0, 20)
+	Title.Font = Enum.Font.Code
+	Title.Text = title
+	Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Title.TextSize = 14.000
+	Title.TextStrokeTransparency = 0.000
+	Title.TextXAlignment = Enum.TextXAlignment.Left
+	
+	local AllTabBtns = Instance.new("Frame")
+	AllTabBtns.Name = "AllTabBtns"
+	AllTabBtns.Parent = UIMainStuff
+	AllTabBtns.BackgroundColor3 = Color3.fromRGB(18, 18, 18)
+	AllTabBtns.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	AllTabBtns.Position = UDim2.new(0.016, 0, 0.011, 0)
+	AllTabBtns.Size = UDim2.new(0, 0, 0, 20)
+	AllTabBtns.ZIndex = 2
+	AllTabBtns.Visible = true
+	AllTabBtns.BorderSizePixel = 1
+	
+	local AllTabBtnsListing = Instance.new("UIListLayout")
+	AllTabBtnsListing.Name = "AllTabBtnsListing"
+	AllTabBtnsListing.Parent = AllTabBtns
+	AllTabBtnsListing.FillDirection = Enum.FillDirection.Horizontal
+	AllTabBtnsListing.SortOrder = Enum.SortOrder.LayoutOrder
+	
+	local AllTabBtnsPadding = Instance.new("UIPadding")
+	AllTabBtnsPadding.Name = "AllTabBtnsPadding"
+	AllTabBtnsPadding.Parent = AllTabBtns
+	AllTabBtnsPadding.PaddingLeft = UDim.new(0, 1)
+	AllTabBtnsPadding.PaddingTop = UDim.new(0, 1)
+	Drag(TopFrame,UIBorder1)
+	
+	local tabs = {}
+	
+	function tabs:Tab(tabname)
+		
+		local PagesHolder = Instance.new("ScrollingFrame")
+		PagesHolder.Name = "PagesHolder"
+		PagesHolder.Parent = AllPagesFolder
+		PagesHolder.Active = true
+		PagesHolder.AnchorPoint = Vector2.new(0.5, 0.5)
+		PagesHolder.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		PagesHolder.BackgroundTransparency = 1.000
+		PagesHolder.BorderSizePixel = 0
+		PagesHolder.Position = UDim2.new(0.5, 0, 0.5, 0)
+		PagesHolder.Size = UDim2.new(1, 0, 1, 0)
+		PagesHolder.ScrollBarThickness = 0
+		PagesHolder.Visible = false
+		
+		local PagesL = Instance.new("Frame")
+		PagesL.Name = "PagesL"
+		PagesL.Parent = PagesHolder
+		PagesL.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		PagesL.BackgroundTransparency = 1.000
+		PagesL.Size = UDim2.new(0.5, 0, 1, 0)
+		
+		local PagesLPadding = Instance.new("UIPadding")
+		PagesLPadding.Name = "PagesLPadding"
+		PagesLPadding.Parent = PagesL
+		PagesLPadding.PaddingTop = UDim.new(0, 30)
+		PagesLPadding.PaddingLeft = UDim.new(0, 4)
+		
+		local PagesLListing = Instance.new("UIListLayout")
+		PagesLListing.Name = "PagesLListing"
+		PagesLListing.Parent = PagesL
+		PagesLListing.HorizontalAlignment = Enum.HorizontalAlignment.Center
+		PagesLListing.SortOrder = Enum.SortOrder.LayoutOrder
+		PagesLListing.Padding = UDim.new(0, 30)
+		
+		local PagesR = Instance.new("Frame")
+		PagesR.Name = "PagesR"
+		PagesR.Parent = PagesHolder
+		PagesR.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		PagesR.BackgroundTransparency = 1.000
+		PagesR.Position = UDim2.new(0.5, 0, 0, 0)
+		PagesR.Size = UDim2.new(0.5, 0, 1, 0)
+		
+		local PagesRPadding = Instance.new("UIPadding")
+		PagesRPadding.Name = "PagesLPadding"
+		PagesRPadding.Parent = PagesR
+		PagesRPadding.PaddingTop = UDim.new(0, 30)
+		PagesRPadding.PaddingRight = UDim.new(0, 4)
+
+		local PagesRListing = Instance.new("UIListLayout")
+		PagesRListing.Name = "PagesRListing"
+		PagesRListing.Parent = PagesR
+		PagesRListing.HorizontalAlignment = Enum.HorizontalAlignment.Center
+		PagesRListing.SortOrder = Enum.SortOrder.LayoutOrder
+		PagesRListing.Padding = UDim.new(0, 30)
+		
+		local Tab = Instance.new("TextButton")
+		Tab.Name = "Tab"
+		Tab.Parent = AllTabBtns
+		Tab.BackgroundColor3 = Color3.fromRGB(12, 12, 12)
+		Tab.BorderColor3 = Color3.fromRGB(60, 60, 60)
+		Tab.Size = UDim2.new(0, 0, 0, 20)
+		Tab.AutoButtonColor = false
+		Tab.Font = Enum.Font.Code
+		Tab.Text = "ㅤ" .. tabname .. "ㅤ"
+		Tab.TextColor3 = Color3.fromRGB(180, 180, 180)
+		Tab.TextSize = 13.000
+		Tab.TextStrokeTransparency = 0.000
+		Tab.AutomaticSize = Enum.AutomaticSize.X
+		
+		local TabLine = Instance.new("Frame")
+		TabLine.Name = "TabLine"
+		TabLine.Parent = Tab
+		TabLine.AnchorPoint = Vector2.new(0.5, 0.5)
+		TabLine.BackgroundColor3 = Color3.fromRGB(138, 3, 1)
+		TabLine.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		TabLine.BorderSizePixel = 0
+		TabLine.Position = UDim2.new(0.5, 0, 0, 0)
+		TabLine.Size = UDim2.new(1, 0, 0, 1)
+		TabLine.Visible = false
+		
+		Tab.MouseButton1Click:Connect(function()
+			for i, v in next, AllPagesFolder:GetChildren() do
+				v.Visible = false
+			end 
+			PagesHolder.Visible = true
+
+			for i, v in next, AllTabBtns:GetChildren() do
+				if v:IsA("TextButton") then
+					v.Name = "Tab"
+					v.Parent = AllTabBtns
+					v.BackgroundColor3 = Color3.fromRGB(12, 12, 12)
+					v.BorderColor3 = Color3.fromRGB(60, 60, 60)
+					v.Position = UDim2.new(2.45557499, 0, 6.99210501, 0)
+					v.Size = UDim2.new(0, 0, 0, 20)
+					v.AutoButtonColor = false
+					v.Font = Enum.Font.Code
+					v.TextColor3 = Color3.fromRGB(180, 180, 180)
+					v.TextSize = 13.000
+					v.TextStrokeTransparency = 0.000
+					end
+				end
+			Tab.Name = "Tab"
+			Tab.Parent = AllTabBtns
+			Tab.BackgroundColor3 = Color3.fromRGB(17, 17, 17)
+			Tab.BorderColor3 = Color3.fromRGB(60, 60, 60)
+			Tab.Size = UDim2.new(0, 0, 0, 21)
+			Tab.AutoButtonColor = false
+			Tab.Font = Enum.Font.Code
+			Tab.TextColor3 = Color3.fromRGB(255, 255, 255)
+			Tab.TextSize = 13.000
+			Tab.TextStrokeTransparency = 0.000
+			Tab.AutomaticSize = Enum.AutomaticSize.X
+			
+			for i,v in next, AllTabBtns:GetDescendants() do
+				if v:IsA("Frame") then
+					v.Visible = false
+				end
+			end
+			TabLine.Visible = true
+		end)
+		
+		
+		AllTabBtnsListing:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+			AllTabBtns.Size = UDim2.new(0, AllTabBtnsListing.AbsoluteContentSize.X+2, 0, 20) 
+		end)
+		
+		local sections = {}
+		
+		function sections:SectionL(name)
+			local PageLeftOutline = Instance.new("Frame")
+			PageLeftOutline.Name = "PageLeftOutline"
+			PageLeftOutline.Parent = PagesL
+			PageLeftOutline.AnchorPoint = Vector2.new(0.5, 0.5)
+			PageLeftOutline.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+			PageLeftOutline.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			PageLeftOutline.Position = UDim2.new(0.249000043, 0, 0.519921303, 0)
+			PageLeftOutline.Size = UDim2.new(0, 212, 0, 460)
+
+			local PageLeft = Instance.new("Frame")
+			PageLeft.Name = "PageLeft"
+			PageLeft.Parent = PageLeftOutline
+			PageLeft.AnchorPoint = Vector2.new(0.5, 0.5)
+			PageLeft.BackgroundColor3 = Color3.fromRGB(17, 17, 17)
+			PageLeft.BorderColor3 = Color3.fromRGB(60, 60, 60)
+			PageLeft.Position = UDim2.new(0.5, 0, 0.5, 0)
+			PageLeft.Size = UDim2.new(1, -2, 1, -2)
+
+			local PageLeftListing = Instance.new("UIListLayout")
+			PageLeftListing.Name = "PageLeftListing"
+			PageLeftListing.Parent = PageLeft
+			PageLeftListing.HorizontalAlignment = Enum.HorizontalAlignment.Center
+			PageLeftListing.SortOrder = Enum.SortOrder.LayoutOrder
+			PageLeftListing.Padding = UDim.new(0, 5)
+
+			local PageLeftPadding = Instance.new("UIPadding")
+			PageLeftPadding.Name = "PageLeftPadding"
+			PageLeftPadding.Parent = PageLeft
+			PageLeftPadding.PaddingTop = UDim.new(0, 10)
+
+			local PageLeftLine = Instance.new("Frame")
+			PageLeftLine.Name = "PageLeftLine"
+			PageLeftLine.Parent = PageLeftOutline
+			PageLeftLine.AnchorPoint = Vector2.new(0.5, 0.5)
+			PageLeftLine.BackgroundColor3 = Color3.fromRGB(138, 3, 1)
+			PageLeftLine.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			PageLeftLine.BorderSizePixel = 0
+			PageLeftLine.Position = UDim2.new(0.5, 0, 0, 1)
+			PageLeftLine.Size = UDim2.new(1, -2, 0, 1)
+
+			local PageLeftTitle = Instance.new("TextLabel")
+			PageLeftTitle.Name = "PageLeftTitle"
+			PageLeftTitle.Parent = PageLeftOutline
+			PageLeftTitle.BackgroundColor3 = Color3.fromRGB(17, 17, 17)
+			PageLeftTitle.BackgroundTransparency = 0
+			PageLeftTitle.BorderSizePixel = 0
+			PageLeftTitle.Position = UDim2.new(0, 9, 0, -8)
+			PageLeftTitle.Size = UDim2.new(0, 0, 0, 16)
+			PageLeftTitle.Font = Enum.Font.Code
+			PageLeftTitle.Text = 'ㅤ' .. name .. 'ㅤ'
+			PageLeftTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+			PageLeftTitle.TextSize = 13.000
+			PageLeftTitle.AutomaticSize = Enum.AutomaticSize.X
+			PageLeftTitle.ZIndex = 100
+
+			PagesLListing:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+				PagesHolder.CanvasSize = UDim2.new(0, 0, 0, PagesLListing.AbsoluteContentSize.Y) 
+			end)
+			PageLeftListing:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+				PageLeftOutline.Size = UDim2.new(0, 212, 0, PageLeftListing.AbsoluteContentSize.Y+20) 
+			end)
+
+			local elementsL = {}
+
+			function elementsL:ButtonL(text, callback)
+				local ButtonL = Instance.new("Frame")
+				ButtonL.Name = "ButtonL"
+				ButtonL.Parent = PageLeft
+				ButtonL.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				ButtonL.BorderColor3 = Color3.fromRGB(0, 0, 0)
+				ButtonL.Position = UDim2.new(0.0350000001, 0, 0.0491070747, 0)
+				ButtonL.Size = UDim2.new(0, 196, 0, 16)
+
+				local ButtonInteract = Instance.new("TextButton")
+				ButtonInteract.Name = "ButtonInteract"
+				ButtonInteract.Parent = ButtonL
+				ButtonInteract.AnchorPoint = Vector2.new(0.5, 0.5)
+				ButtonInteract.BackgroundColor3 = Color3.fromRGB(34, 34, 34)
+				ButtonInteract.BorderColor3 = Color3.fromRGB(60, 60, 60)
+				ButtonInteract.Position = UDim2.new(0.5, 0, 0.5, 0)
+				ButtonInteract.Size = UDim2.new(1, -2, 1, -2)
+				ButtonInteract.AutoButtonColor = false
+				ButtonInteract.Font = Enum.Font.Code
+				ButtonInteract.TextColor3 = Color3.fromRGB(160, 160, 160)
+				ButtonInteract.TextSize = 13.000
+				ButtonInteract.TextStrokeTransparency = 0.000
+				ButtonInteract.Text = text
+				ButtonInteract.MouseButton1Click:Connect(function()
+					pcall(callback)
+				end)
+				ButtonInteract.MouseButton1Down:Connect(function()
+					ButtonInteract.BackgroundColor3 = Color3.fromRGB(79, 0, 0)
+					ButtonInteract.TextColor3 = Color3.fromRGB(255, 255, 255)
+				end)
+				ButtonInteract.MouseButton1Up:Connect(function()
+					ButtonInteract.BackgroundColor3 = Color3.fromRGB(34, 34, 34)
+					ButtonInteract.TextColor3 = Color3.fromRGB(160, 160, 160)
+				end)
+				ButtonL.MouseEnter:Connect(function()
+					ButtonInteract.BorderColor3 = Color3.fromRGB(138, 3, 1)
+				end)
+				ButtonL.MouseLeave:Connect(function()
+					ButtonInteract.BorderColor3 = Color3.fromRGB(60, 60, 60)
+					ButtonInteract.BackgroundColor3 = Color3.fromRGB(34, 34, 34)
+					ButtonInteract.TextColor3 = Color3.fromRGB(160, 160, 160)
+				end)
+			end
+
+			function elementsL:ToggleL(text, callback)
+				local ToggleL = Instance.new("Frame")
+				ToggleL.Name = "ToggleL"
+				ToggleL.Parent = PageLeft
+				ToggleL.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				ToggleL.BackgroundTransparency = 1.000
+				ToggleL.BorderColor3 = Color3.fromRGB(0, 0, 0)
+				ToggleL.Position = UDim2.new(0.0350000001, 0, 0.0491070747, 0)
+				ToggleL.Size = UDim2.new(0, 196, 0, 16)
+
+				local ToggleInteract = Instance.new("TextButton")
+				ToggleInteract.Name = "ToggleInteract"
+				ToggleInteract.Parent = ToggleL
+				ToggleInteract.AnchorPoint = Vector2.new(0.5, 0.5)
+				ToggleInteract.BackgroundColor3 = Color3.fromRGB(34, 34, 34)
+				ToggleInteract.BackgroundTransparency = 1.000
+				ToggleInteract.BorderColor3 = Color3.fromRGB(60, 60, 60)
+				ToggleInteract.Position = UDim2.new(0.5, 0, 0.5, 0)
+				ToggleInteract.Size = UDim2.new(1, 0, 1, 0)
+				ToggleInteract.AutoButtonColor = false
+				ToggleInteract.Font = Enum.Font.Code
+				ToggleInteract.Text = ""
+				ToggleInteract.TextColor3 = Color3.fromRGB(160, 160, 160)
+				ToggleInteract.TextSize = 13.000
+				ToggleInteract.TextStrokeTransparency = 0.000
+
+				local ToggleFrameOutline = Instance.new("Frame")
+				ToggleFrameOutline.Name = "ToggleFrameOutline"
+				ToggleFrameOutline.Parent = ToggleL
+				ToggleFrameOutline.AnchorPoint = Vector2.new(0.5, 0.5)
+				ToggleFrameOutline.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				ToggleFrameOutline.BorderColor3 = Color3.fromRGB(0, 0, 0)
+				ToggleFrameOutline.Position = UDim2.new(0, 6, 0.5, 0)
+				ToggleFrameOutline.Size = UDim2.new(0, 12, 0, 12)
+
+				local ToggleFrame = Instance.new("Frame")
+				ToggleFrame.Name = "ToggleFrame"
+				ToggleFrame.Parent = ToggleFrameOutline
+				ToggleFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+				ToggleFrame.BackgroundColor3 = Color3.fromRGB(34, 34, 34)
+				ToggleFrame.BorderColor3 = Color3.fromRGB(60, 60, 60)
+				ToggleFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
+				ToggleFrame.Size = UDim2.new(1, -2, 1, -2)
+
+				local ToggleText = Instance.new("TextLabel")
+				ToggleText.Name = "ToggleText"
+				ToggleText.Parent = ToggleL
+				ToggleText.AnchorPoint = Vector2.new(0.5, 0.5)
+				ToggleText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				ToggleText.BackgroundTransparency = 1.000
+				ToggleText.Position = UDim2.new(0.55, 0, 0.5, 0)
+				ToggleText.Size = UDim2.new(0, 176, 1, 0)
+				ToggleText.Font = Enum.Font.Code
+				ToggleText.Text = text
+				ToggleText.TextColor3 = Color3.fromRGB(180, 180, 180)
+				ToggleText.TextSize = 13.000
+				ToggleText.TextStrokeTransparency = 0.000
+				ToggleText.TextXAlignment = Enum.TextXAlignment.Left
+				local toggled = false
+				ToggleInteract.MouseButton1Click:Connect(function()
+					toggled = not toggled
+					if toggled then
+						ToggleFrame.BackgroundColor3 = Color3.fromRGB(79, 0, 0)
+						ToggleText.TextColor3 = Color3.fromRGB(255, 255, 255)
+					else
+						ToggleFrame.BackgroundColor3 = Color3.fromRGB(34, 34, 34)
+						ToggleText.TextColor3 = Color3.fromRGB(180, 180, 180)
+					end
+					pcall(callback, toggled)
+				end)
+				ToggleL.MouseEnter:Connect(function()
+					ToggleFrame.BorderColor3 = Color3.fromRGB(138, 3, 1)
+				end)
+				ToggleL.MouseLeave:Connect(function()
+					ToggleFrame.BorderColor3 = Color3.fromRGB(60, 60, 60)
+					if not toggled then
+						ToggleFrame.BackgroundColor3 = Color3.fromRGB(34, 34, 34)
+					else
+						ToggleFrame.BackgroundColor3 = Color3.fromRGB(79, 0, 0)
+						ToggleFrame.BorderColor3 = Color3.fromRGB(138, 3, 1)
+					end
+				end)
+				
+				function elementsL:SliderL(name, min, max, start, inc, callback)
+					local dragging = false
+					
+					local SliderL = Instance.new("Frame")
+					SliderL.Name = "SliderL"
+					SliderL.Parent = PageLeft
+					SliderL.BackgroundColor3 = Color3.fromRGB(18, 18, 18)
+					SliderL.BorderSizePixel = 0
+					SliderL.Position = UDim2.new(-0.180000007, 0, 0.149553567, 0)
+					SliderL.Size = UDim2.new(0, 196, 0, 30)
+
+					local SlideBackOutline = Instance.new("Frame")
+					SlideBackOutline.Name = "SlideBackOutline"
+					SlideBackOutline.Parent = SliderL
+					SlideBackOutline.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+					SlideBackOutline.BorderColor3 = Color3.fromRGB(0, 0, 0)
+					SlideBackOutline.Position = UDim2.new(0, 0, 0.566666663, 0)
+					SlideBackOutline.Size = UDim2.new(1, 0, -0.0333333351, 14)
+
+					local SlideBack = Instance.new("Frame")
+					SlideBack.Name = "SlideBack"
+					SlideBack.Parent = SlideBackOutline
+					SlideBack.AnchorPoint = Vector2.new(0.5, 0.5)
+					SlideBack.BackgroundColor3 = Color3.fromRGB(34, 34, 34)
+					SlideBack.BorderColor3 = Color3.fromRGB(60, 60, 60)
+					SlideBack.Position = UDim2.new(0.5, 0, 0.5, 0)
+					SlideBack.Size = UDim2.new(1, -2, 1, -2)
+
+					local Slide = Instance.new("Frame")
+					Slide.Name = "Slide"
+					Slide.Parent = SlideBack
+					Slide.BackgroundColor3 = Color3.fromRGB(98, 0, 0)
+					Slide.BorderColor3 = Color3.fromRGB(60, 60, 60)
+					Slide.BorderSizePixel = 0
+					Slide.Size = UDim2.new(0, 50, 1, 0)
+					
+					local SliderName = Instance.new("TextLabel")
+					SliderName.Name = "SliderValue"
+					SliderName.Parent = SliderL
+					SliderName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+					SliderName.BackgroundTransparency = 1.000
+					SliderName.Position = UDim2.new(0.005, 0, 0, 0)
+					SliderName.Size = UDim2.new(0, 98, 0, 17)
+					SliderName.Text = name
+					SliderName.Font = Enum.Font.Code
+					SliderName.TextColor3 = Color3.fromRGB(160, 160, 160)
+					SliderName.TextSize = 13.000
+					SliderName.TextStrokeTransparency = 0.000
+					SliderName.TextXAlignment = Enum.TextXAlignment.Left
+					
+					local SliderValue = Instance.new("TextLabel")
+					SliderValue.Name = "SliderValue"
+					SliderValue.Parent = SliderL
+					SliderValue.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+					SliderValue.BackgroundTransparency = 1.000
+					SliderValue.Position = UDim2.new(0.525, 0, 0, 0)
+					SliderValue.Size = UDim2.new(0, 90, 0, 17)
+					SliderValue.Font = Enum.Font.Code
+					SliderValue.Text = "50"
+					SliderValue.TextColor3 = Color3.fromRGB(160, 160, 160)
+					SliderValue.TextSize = 13.000
+					SliderValue.TextStrokeTransparency = 0.000
+					SliderValue.TextXAlignment = Enum.TextXAlignment.Right
+					
+					local RunService = game:GetService("RunService")
+					RunService.RenderStepped:Connect(function()
+						if Slide.Size == UDim2.new(0, 0, 1, 0) then
+							SliderValue.TextColor3 = Color3.fromRGB(160, 160, 160)
+							SliderName.TextColor3 = Color3.fromRGB(160, 160, 160)
+						else
+							SliderValue.TextColor3 = Color3.fromRGB(255, 255, 255)
+							SliderName.TextColor3 = Color3.fromRGB(255, 255, 255)
+						end
+						SlideBackOutline.MouseEnter:Connect(function()
+							SlideBack.BorderColor3 = Color3.fromRGB(138, 3, 1)
+						end)
+						SlideBackOutline.MouseLeave:Connect(function()
+							SlideBack.BorderColor3 = Color3.fromRGB(60, 60, 60)
+						end)
+					end)
+					
+					local function move(Input) --math not be me btw
+						local XSize = math.clamp((Input.Position.X - SlideBack.AbsolutePosition.X) / SlideBack.AbsoluteSize.X, 0, 1)
+						local Increment = inc and (max / ((max - min) / (inc * 4))) or 
+							(max >= 50 and max / ((max - min) / 4)) or 
+							(max >= 25 and max / ((max - min) / 2)) or 
+							(max / (max - min))
+
+						local SizeRounded = UDim2.new((math.round(XSize * ((max / Increment) * 4)) / ((max / Increment) * 4)), 0, 1, 0)
+						Slide:TweenSize(SizeRounded, Enum.EasingDirection.Out, Enum.EasingStyle.Linear, .05, true)
+
+						local Val = math.round((((SizeRounded.X.Scale * max) / max) * (max - min) + min) * 20) / 20
+						SliderValue.Text = tostring(Val)
+						pcall(callback, tonumber(Val))
+					end
+
+					SlideBack.InputBegan:Connect(function(input)
+						if input.UserInputType == Enum.UserInputType.MouseButton1 then
+							dragging = true
+						end
+					end)
+
+					SlideBack.InputEnded:Connect(function(input)
+						if input.UserInputType == Enum.UserInputType.MouseButton1 then
+							dragging = false
+						end
+					end)
+
+					game:GetService("UserInputService").InputChanged:Connect(function(input)
+						if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+							move(input)
+						end
+					end)
+				end
+			end
+			return elementsL
+		end
+		function sections:SectionR(name)
+			local PageRightOutline = Instance.new("Frame")
+			PageRightOutline.Name = "PageRightOutline"
+			PageRightOutline.Parent = PagesR
+			PageRightOutline.AnchorPoint = Vector2.new(0.5, 0.5)
+			PageRightOutline.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+			PageRightOutline.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			PageRightOutline.Position = UDim2.new(0.249000043, 0, 0.519921303, 0)
+			PageRightOutline.Size = UDim2.new(0, 202, 0, 460)
+
+			local PageRight = Instance.new("Frame")
+			PageRight.Name = "PageRight"
+			PageRight.Parent = PageRightOutline
+			PageRight.AnchorPoint = Vector2.new(0.5, 0.5)
+			PageRight.BackgroundColor3 = Color3.fromRGB(17, 17, 17)
+			PageRight.BorderColor3 = Color3.fromRGB(60, 60, 60)
+			PageRight.Position = UDim2.new(0.5, 0, 0.5, 0)
+			PageRight.Size = UDim2.new(1, -2, 1, -2)
+
+			local PageRightListing = Instance.new("UIListLayout")
+			PageRightListing.Name = "PageRightListing"
+			PageRightListing.Parent = PageRight
+			PageRightListing.HorizontalAlignment = Enum.HorizontalAlignment.Center
+			PageRightListing.SortOrder = Enum.SortOrder.LayoutOrder
+			PageRightListing.Padding = UDim.new(0, 5)
+
+			local PageRightPadding = Instance.new("UIPadding")
+			PageRightPadding.Name = "PageRightPadding"
+			PageRightPadding.Parent = PageRight
+			PageRightPadding.PaddingTop = UDim.new(0, 10)
+
+			local PageRightLine = Instance.new("Frame")
+			PageRightLine.Name = "PageRightLine"
+			PageRightLine.Parent = PageRightOutline
+			PageRightLine.AnchorPoint = Vector2.new(0.5, 0.5)
+			PageRightLine.BackgroundColor3 = Color3.fromRGB(138, 3, 1)
+			PageRightLine.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			PageRightLine.BorderSizePixel = 0
+			PageRightLine.Position = UDim2.new(0.5, 0, 0, 1)
+			PageRightLine.Size = UDim2.new(1, 0, 0, 1)
+
+			local PageRightTitle = Instance.new("TextLabel")
+			PageRightTitle.Name = "PageRightTitle"
+			PageRightTitle.Parent = PageRightOutline
+			PageRightTitle.BackgroundColor3 = Color3.fromRGB(17, 17, 17)
+			PageRightTitle.BackgroundTransparency = 0
+			PageRightTitle.BorderSizePixel = 0
+			PageRightTitle.Position = UDim2.new(0, 9, 0, -8)
+			PageRightTitle.Size = UDim2.new(0, 0, 0, 16)
+			PageRightTitle.Font = Enum.Font.Code
+			PageRightTitle.Text = 'ㅤ' .. name .. 'ㅤ'
+			PageRightTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+			PageRightTitle.TextSize = 13.000
+			PageRightTitle.AutomaticSize = Enum.AutomaticSize.X
+			PageRightTitle.ZIndex = 100
+			
+			PagesRListing:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+				PagesHolder.CanvasSize = UDim2.new(0, 0, 0, PagesRListing.AbsoluteContentSize.Y) 
+			end)
+			PageRightListing:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+				PageRightOutline.Size = UDim2.new(0, 212, 0, PageRightListing.AbsoluteContentSize.Y+20) 
+			end)
+
+			local elementsR = {}
+
+			function elementsR:ButtonR(text, callback)
+				local ButtonR = Instance.new("Frame")
+				ButtonR.Name = "ButtonR"
+				ButtonR.Parent = PageRight
+				ButtonR.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				ButtonR.BorderColor3 = Color3.fromRGB(0, 0, 0)
+				ButtonR.Position = UDim2.new(0.0350000001, 0, 0.0491070747, 0)
+				ButtonR.Size = UDim2.new(0, 196, 0, 16)
+
+				local ButtonInteract = Instance.new("TextButton")
+				ButtonInteract.Name = "ButtonInteract"
+				ButtonInteract.Parent = ButtonR
+				ButtonInteract.AnchorPoint = Vector2.new(0.5, 0.5)
+				ButtonInteract.BackgroundColor3 = Color3.fromRGB(34, 34, 34)
+				ButtonInteract.BorderColor3 = Color3.fromRGB(60, 60, 60)
+				ButtonInteract.Position = UDim2.new(0.5, 0, 0.5, 0)
+				ButtonInteract.Size = UDim2.new(1, -2, 1, -2)
+				ButtonInteract.AutoButtonColor = false
+				ButtonInteract.Font = Enum.Font.Code
+				ButtonInteract.TextColor3 = Color3.fromRGB(160, 160, 160)
+				ButtonInteract.TextSize = 13.000
+				ButtonInteract.TextStrokeTransparency = 0.000
+				ButtonInteract.Text = text
+				ButtonInteract.MouseButton1Click:Connect(function()
+					pcall(callback)
+				end)
+				ButtonInteract.MouseButton1Down:Connect(function()
+					ButtonInteract.BackgroundColor3 = Color3.fromRGB(79, 0, 0)
+					ButtonInteract.TextColor3 = Color3.fromRGB(255, 255, 255)
+				end)
+				ButtonInteract.MouseButton1Up:Connect(function()
+					ButtonInteract.BackgroundColor3 = Color3.fromRGB(34, 34, 34)
+					ButtonInteract.TextColor3 = Color3.fromRGB(160, 160, 160)
+				end)
+				ButtonR.MouseEnter:Connect(function()
+					ButtonInteract.BorderColor3 = Color3.fromRGB(138, 3, 1)
+				end)
+				ButtonR.MouseLeave:Connect(function()
+					ButtonInteract.BorderColor3 = Color3.fromRGB(60, 60, 60)
+					ButtonInteract.BackgroundColor3 = Color3.fromRGB(34, 34, 34)
+					ButtonInteract.TextColor3 = Color3.fromRGB(160, 160, 160)
+				end)
+			end
+
+			function elementsR:ToggleR(text, callback)
+				local ToggleR = Instance.new("Frame")
+				ToggleR.Name = "ToggleR"
+				ToggleR.Parent = PageRight
+				ToggleR.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				ToggleR.BackgroundTransparency = 1.000
+				ToggleR.BorderColor3 = Color3.fromRGB(0, 0, 0)
+				ToggleR.Position = UDim2.new(0.0350000001, 0, 0.0491070747, 0)
+				ToggleR.Size = UDim2.new(0, 196, 0, 16)
+
+				local ToggleInteract = Instance.new("TextButton")
+				ToggleInteract.Name = "ToggleInteract"
+				ToggleInteract.Parent = ToggleR
+				ToggleInteract.AnchorPoint = Vector2.new(0.5, 0.5)
+				ToggleInteract.BackgroundColor3 = Color3.fromRGB(34, 34, 34)
+				ToggleInteract.BackgroundTransparency = 1.000
+				ToggleInteract.BorderColor3 = Color3.fromRGB(60, 60, 60)
+				ToggleInteract.Position = UDim2.new(0.5, 0, 0.5, 0)
+				ToggleInteract.Size = UDim2.new(1, 0, 1, 0)
+				ToggleInteract.AutoButtonColor = false
+				ToggleInteract.Font = Enum.Font.Code
+				ToggleInteract.Text = ""
+				ToggleInteract.TextColor3 = Color3.fromRGB(160, 160, 160)
+				ToggleInteract.TextSize = 13.000
+				ToggleInteract.TextStrokeTransparency = 0.000
+
+				local ToggleFrameOutline = Instance.new("Frame")
+				ToggleFrameOutline.Name = "ToggleFrameOutline"
+				ToggleFrameOutline.Parent = ToggleR
+				ToggleFrameOutline.AnchorPoint = Vector2.new(0.5, 0.5)
+				ToggleFrameOutline.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				ToggleFrameOutline.BorderColor3 = Color3.fromRGB(0, 0, 0)
+				ToggleFrameOutline.Position = UDim2.new(0, 6, 0.5, 0)
+				ToggleFrameOutline.Size = UDim2.new(0, 12, 0, 12)
+
+				local ToggleFrame = Instance.new("Frame")
+				ToggleFrame.Name = "ToggleFrame"
+				ToggleFrame.Parent = ToggleFrameOutline
+				ToggleFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+				ToggleFrame.BackgroundColor3 = Color3.fromRGB(34, 34, 34)
+				ToggleFrame.BorderColor3 = Color3.fromRGB(60, 60, 60)
+				ToggleFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
+				ToggleFrame.Size = UDim2.new(1, -2, 1, -2)
+
+				local ToggleText = Instance.new("TextLabel")
+				ToggleText.Name = "ToggleText"
+				ToggleText.Parent = ToggleR
+				ToggleText.AnchorPoint = Vector2.new(0.5, 0.5)
+				ToggleText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				ToggleText.BackgroundTransparency = 1.000
+				ToggleText.Position = UDim2.new(0.55, 0, 0.5, 0)
+				ToggleText.Size = UDim2.new(0, 176, 1, 0)
+				ToggleText.Font = Enum.Font.Code
+				ToggleText.Text = text
+				ToggleText.TextColor3 = Color3.fromRGB(180, 180, 180)
+				ToggleText.TextSize = 13.000
+				ToggleText.TextStrokeTransparency = 0.000
+				ToggleText.TextXAlignment = Enum.TextXAlignment.Left
+				local toggled = false
+				ToggleInteract.MouseButton1Click:Connect(function()
+					toggled = not toggled
+					if toggled then
+						ToggleFrame.BackgroundColor3 = Color3.fromRGB(79, 0, 0)
+						ToggleText.TextColor3 = Color3.fromRGB(255, 255, 255)
+					else
+						ToggleFrame.BackgroundColor3 = Color3.fromRGB(34, 34, 34)
+						ToggleText.TextColor3 = Color3.fromRGB(160, 160, 160)
+					end
+					pcall(callback, toggled)
+				end)
+				ToggleR.MouseEnter:Connect(function()
+					ToggleFrame.BorderColor3 = Color3.fromRGB(138, 3, 1)
+				end)
+				ToggleR.MouseLeave:Connect(function()
+					ToggleFrame.BorderColor3 = Color3.fromRGB(60, 60, 60)
+					if not toggled then
+						ToggleFrame.BackgroundColor = Color3.fromRGB(34, 34, 34)
+					else
+						ToggleFrame.BackgroundColor3 = Color3.fromRGB(79, 0, 0)
+						ToggleFrame.BorderColor3 = Color3.fromRGB(138, 3, 1)
+					end
+				end)
+				function elementsR:SliderR(name, min, max, start, inc, callback)
+					local dragging = false
+
+					local SliderR = Instance.new("Frame")
+					SliderR.Name = "SliderR"
+					SliderR.Parent = PageRight
+					SliderR.BackgroundColor3 = Color3.fromRGB(18, 18, 18)
+					SliderR.BorderSizePixel = 0
+					SliderR.Position = UDim2.new(-0.180000007, 0, 0.149553567, 0)
+					SliderR.Size = UDim2.new(0, 186, 0, 30)
+
+					local SlideBackOutline = Instance.new("Frame")
+					SlideBackOutline.Name = "SlideBackOutline"
+					SlideBackOutline.Parent = SliderR
+					SlideBackOutline.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+					SlideBackOutline.BorderColor3 = Color3.fromRGB(0, 0, 0)
+					SlideBackOutline.Position = UDim2.new(0, 0, 0.566666663, 0)
+					SlideBackOutline.Size = UDim2.new(1, 0, -0.0333333351, 14)
+
+					local SlideBack = Instance.new("Frame")
+					SlideBack.Name = "SlideBack"
+					SlideBack.Parent = SlideBackOutline
+					SlideBack.AnchorPoint = Vector2.new(0.5, 0.5)
+					SlideBack.BackgroundColor3 = Color3.fromRGB(34, 34, 34)
+					SlideBack.BorderColor3 = Color3.fromRGB(60, 60, 60)
+					SlideBack.Position = UDim2.new(0.5, 0, 0.5, 0)
+					SlideBack.Size = UDim2.new(1, -2, 1, -2)
+
+					local Slide = Instance.new("Frame")
+					Slide.Name = "Slide"
+					Slide.Parent = SlideBack
+					Slide.BackgroundColor3 = Color3.fromRGB(98, 0, 0)
+					Slide.BorderColor3 = Color3.fromRGB(60, 60, 60)
+					Slide.BorderSizePixel = 0
+					Slide.Size = UDim2.new(0, 50, 1, 0)
+
+					local SliderName = Instance.new("TextLabel")
+					SliderName.Name = "SliderValue"
+					SliderName.Parent = SliderR
+					SliderName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+					SliderName.BackgroundTransparency = 1.000
+					SliderName.Position = UDim2.new(0.00537634408, 0, 0, 0)
+					SliderName.Size = UDim2.new(0, 184, 0, 17)
+					SliderName.Text = name
+					SliderName.Font = Enum.Font.Code
+					SliderName.TextColor3 = Color3.fromRGB(160, 160, 160)
+					SliderName.TextSize = 13.000
+					SliderName.TextStrokeTransparency = 0.000
+					SliderName.TextXAlignment = Enum.TextXAlignment.Left
+
+					local SliderValue = Instance.new("TextLabel")
+					SliderValue.Name = "SliderValue"
+					SliderValue.Parent = SliderR
+					SliderValue.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+					SliderValue.BackgroundTransparency = 1.000
+					SliderValue.Position = UDim2.new(0.524999976, 0, 0, 0)
+					SliderValue.Size = UDim2.new(0, 86, 0, 17)
+					SliderValue.Font = Enum.Font.Code
+					SliderValue.Text = "50"
+					SliderValue.TextColor3 = Color3.fromRGB(160, 160, 160)
+					SliderValue.TextSize = 13.000
+					SliderValue.TextStrokeTransparency = 0.000
+					SliderValue.TextXAlignment = Enum.TextXAlignment.Right
+					
+					local RunService = game:GetService("RunService")
+					RunService.RenderStepped:Connect(function()
+						if Slide.Size == UDim2.new(0, 0, 1, 0) then
+							SliderValue.TextColor3 = Color3.fromRGB(160, 160, 160)
+							SliderName.TextColor3 = Color3.fromRGB(160, 160, 160)
+						else
+							SliderValue.TextColor3 = Color3.fromRGB(255, 255, 255)
+							SliderName.TextColor3 = Color3.fromRGB(255, 255, 255)
+						end
+						SlideBackOutline.MouseEnter:Connect(function()
+							SlideBack.BorderColor3 = Color3.fromRGB(138, 3, 1)
+						end)
+						SlideBackOutline.MouseLeave:Connect(function()
+							SlideBack.BorderColor3 = Color3.fromRGB(60, 60, 60)
+						end)
+					end)
+
+					local function move(Input) --math not be me btw
+						local XSize = math.clamp((Input.Position.X - SlideBack.AbsolutePosition.X) / SlideBack.AbsoluteSize.X, 0, 1)
+						local Increment = inc and (max / ((max - min) / (inc * 4))) or 
+							(max >= 50 and max / ((max - min) / 4)) or 
+							(max >= 25 and max / ((max - min) / 2)) or 
+							(max / (max - min))
+
+						local SizeRounded = UDim2.new((math.round(XSize * ((max / Increment) * 4)) / ((max / Increment) * 4)), 0, 1, 0)
+						Slide:TweenSize(SizeRounded, Enum.EasingDirection.Out, Enum.EasingStyle.Quad, .05, true)
+
+						local Val = math.round((((SizeRounded.X.Scale * max) / max) * (max - min) + min) * 20) / 20
+						SliderValue.Text = tostring(Val)
+						pcall(callback, tonumber(Val))
+					end
+
+					SlideBack.InputBegan:Connect(function(input)
+						if input.UserInputType == Enum.UserInputType.MouseButton1 then
+							dragging = true
+						end
+					end)
+
+					SlideBack.InputEnded:Connect(function(input)
+						if input.UserInputType == Enum.UserInputType.MouseButton1 then
+							dragging = false
+						end
+					end)
+
+					game:GetService("UserInputService").InputChanged:Connect(function(input)
+						if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+							move(input)
+						end
+					end)
+				end
+				end
+			return elementsR
+			end
+		return sections
+	end
+	return tabs
+end
+return lib
